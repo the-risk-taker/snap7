@@ -64,6 +64,7 @@ void PrepareBuffer()
 //------------------------------------------------------------------------------
 // SysSleep (copied from snap_sysutils.cpp)
 //------------------------------------------------------------------------------
+#if DYNAMIC_LINKING
 void SysSleep(longword Delay_ms)
 {
 #ifdef OS_WINDOWS
@@ -75,6 +76,9 @@ void SysSleep(longword Delay_ms)
     nanosleep(&ts, (struct timespec *)0);
 #endif
 }
+#else
+extern void SysSleep(longword Delay_ms);
+#endif
 //------------------------------------------------------------------------------
 // Main
 //------------------------------------------------------------------------------

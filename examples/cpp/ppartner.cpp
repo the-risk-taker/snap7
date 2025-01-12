@@ -57,20 +57,6 @@ void Usage()
 	getchar();
 }
 //------------------------------------------------------------------------------
-// SysSleep (copied from snap_sysutils.cpp)
-//------------------------------------------------------------------------------
-void SysSleep(longword Delay_ms)
-{
-#ifdef OS_WINDOWS
-    Sleep(Delay_ms);
-#else
-    struct timespec ts;
-    ts.tv_sec = (time_t)(Delay_ms / 1000);
-    ts.tv_nsec =(long)((Delay_ms - ts.tv_sec) * 1000000);
-    nanosleep(&ts, (struct timespec *)0);
-#endif
-}
-//------------------------------------------------------------------------------
 // hexdump, a very nice function, it's not mine.
 // I found it on the net somewhere some time ago... thanks to the author ;-)
 //------------------------------------------------------------------------------

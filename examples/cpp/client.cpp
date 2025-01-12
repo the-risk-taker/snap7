@@ -60,8 +60,9 @@ void S7API CliCompletion(void *usrPtr, int opCode, int opResult)
     JobDone = true;
 }
 //------------------------------------------------------------------------------
-// SysSleep (copied from snap_sysutils.cpp) multiplatform millisec sleep
+// SysSleep (copied from snap_sysutils.cpp)
 //------------------------------------------------------------------------------
+#if DYNAMIC_LINKING
 void SysSleep(longword Delay_ms)
 {
 #ifdef OS_WINDOWS
@@ -73,6 +74,9 @@ void SysSleep(longword Delay_ms)
     nanosleep(&ts, (struct timespec *)0);
 #endif
 }
+#else
+extern void SysSleep(longword Delay_ms);
+#endif
 //------------------------------------------------------------------------------
 //  Usage Syntax
 //------------------------------------------------------------------------------
